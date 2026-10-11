@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterprojects/home_page.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'login_page.dart';
 
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget{
             brightness:Brightness.light,
           ),
 
+fontFamily: GoogleFonts.lato().fontFamily,
 appBarTheme: AppBarThemeData(
   foregroundColor: Colors.white,
   backgroundColor: Theme.of(context).colorScheme.primary
@@ -47,9 +49,6 @@ appBarTheme: AppBarThemeData(
         ),
     //Automatically switch based on system settings
         themeMode:ThemeMode.light,
-      //Global styling-------------
-
-
       //home:HomePage(),
       routes:{
         "/":(context)=>LoginPage(),
