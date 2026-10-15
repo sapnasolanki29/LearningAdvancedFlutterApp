@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterprojects/home_page.dart';
+import 'package:flutterprojects/routes/routes.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'login_page.dart';
@@ -49,11 +50,12 @@ appBarTheme: AppBarThemeData(
         ),
     //Automatically switch based on system settings
         themeMode:ThemeMode.light,
+      debugShowCheckedModeBanner: false,
       //home:HomePage(),
       routes:{
         "/":(context)=>LoginPage(),
-        "/login":(context)=>LoginPage(),
-        "/home":(context)=>HomePage(),
+        MyRoutes.loginRoute:(context)=>LoginPage(),
+        MyRoutes.homeRoute:(context)=>HomePage(),
       },
     );
   }
