@@ -1,0 +1,88 @@
+{
+  "courses": [
+    {
+      "id": 1,
+      "title": "Flutter",
+      "category": "Mobile Development",
+      "description": "Cross-platform mobile app development.",
+      "duration": "3M",
+      "demand": "High",
+      "salary": "10 LPA",
+      "fee": "Free",
+      "suitableFor": "dart+oop",
+      "imageUrl": "https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": 2,
+      "title": "FullStack",
+      "category": "Web Design",
+      "description": "HTML, CSS, JS, React apps.",
+      "duration": "4M",
+      "demand": "High",
+      "salary": "8 LPA",
+      "fee": "Free",
+      "suitableFor": "html+js",
+      "imageUrl": "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": 3,
+      "title": "UI/UX",
+      "category": "UI/UX Design",
+      "description": "Figma design & wireframing.",
+      "duration": "2M",
+      "demand": "Med",
+      "salary": "7 LPA",
+      "fee": "Free",
+      "suitableFor": "creativity",
+      "imageUrl": "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": 4,
+      "title": "Graphic",
+      "category": "Graphic Designing",
+      "description": "Photoshop & branding assets.",
+      "duration": "2M",
+      "demand": "Med",
+      "salary": "6 LPA",
+      "fee": "Free",
+      "suitableFor": "design+art",
+      "imageUrl": "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": 5,
+      "title": "VideoEdit",
+      "category": "Video Editing",
+      "description": "Premiere Pro & reels editing.",
+      "duration": "2M",
+      "demand": "High",
+      "salary": "7 LPA",
+      "fee": "Free",
+      "suitableFor": "editing+cuts",
+      "imageUrl": "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": 6,
+      "title": "AIVideo",
+      "category": "AI Videos",
+      "description": "Runway, Sora & generative tools.",
+      "duration": "1M",
+      "demand": "High",
+      "salary": "12 LPA",
+      "fee": "Paid",
+      "suitableFor": "ai+prompts",
+      "imageUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": 7,
+      "title": "AgenticAI",
+      "category": "Agentic AI",
+      "description": "LangChain, AutoGen & Python.",
+      "duration": "3M",
+      "demand": "High",
+      "salary": "18 LPA",
+      "fee": "Paid",
+      "suitableFor": "python+ai",
+      "imageUrl": "https://onug.net/wp-content/uploads/2025/02/ONUG-Blog-Image-1024x512-1.jpg"
+    }
+  ]
+}
