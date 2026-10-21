@@ -25,9 +25,11 @@ final String imagePath="assets/images/login.jpg";
                             child: Column(
                               children: [
                                CircleAvatar(
+                                 backgroundColor: Colors.white,
                             radius: 30,
                                       backgroundImage:imageUrl.isEmpty?(imagePath.isEmpty? AssetImage(imagePath):null):null,
-                                      child: Icon(Icons.person, size: 40, color: Theme.of(context).colorScheme.primary,),
+                                      child: Icon(Icons.person, size: 40, color: Theme.of(context).colorScheme.primary,
+                                      ),
                                     ),
                               SizedBox(height: 10,),
 

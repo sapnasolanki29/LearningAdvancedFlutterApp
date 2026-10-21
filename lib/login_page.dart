@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(height: 20,),
                 Material(
                   borderRadius:buttonChanged ? BorderRadius.circular(30) :BorderRadius.circular(5) ,
-                  color: Colors.deepPurple,
+                  color: Theme.of(context).colorScheme.primary,
                   child: InkWell(
                     onTap:_moveToHome,
                     child: AnimatedContainer(

@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutterprojects/Models/catalog.dart';
 import 'package:flutterprojects/widget/drawer.dart';
 import 'package:flutterprojects/widget/itemWidget.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'Models/catalogModel.dart';
 
@@ -26,40 +27,101 @@ class _HomePageState extends State<HomePage> {
   }
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
-     appBar: AppBar(
-       title: Text("Catalog App"),
-     ),
-     body:Padding(
-       padding: const EdgeInsets.all(10.0),
-       child:(CatalogModel.courses.isNotEmpty)?
-       // ListView.builder(
-       //   itemCount: CatalogModel.courses.length,
-       //     itemBuilder: (context,index)=>
-       //     ItemWidget(item: CatalogModel.courses[index])
-       // )
-      GridView.builder(
-        itemCount: CatalogModel.courses.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10),
-          itemBuilder: (context, index){
-          final item=CatalogModel.courses[index];
-            return Card(
-              clipBehavior: Clip.antiAlias,
-              child: GridTile(
-                  child: Image.network(item.image, fit: BoxFit.cover,)
-              ),
-            );
-          })
-           : Center(
-         child: CircularProgressIndicator(),
-       ),
-     ),
-
+   return
+     Scaffold(
      drawer:MyDrawer(),
+     // appBar: AppBar(
+     //   title: Text("Catalog App"),
+     // ),
+     body:Builder(
+         builder: (context) =>
+     Container(
+           decoration:  BoxDecoration(
+             gradient: LinearGradient(
+               begin: Alignment.topCenter,
+               end: Alignment.bottomCenter,
+               colors: [
+                 Theme.of(context).colorScheme.primaryContainer, // Light green gradient
+                 Color(0xFFF8F9FA), // White / Light grey
+               ],
+             ),
+           ),
+           child:
+           SafeArea(
+             child: Padding(
+               padding: const EdgeInsets.all(8.0),
+               child: Column(
+                 spacing: 10,
+                 crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+               Row(// App Bar
+                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                 children: [
+                   Row(// starting title
+                     spacing: 10,
+                     children: [
+               GestureDetector(
+                 onTap: (){
+                   Scaffold.of(context).openDrawer();
+                 },
+                 child: Icon(Icons.menu,),
+               ),
+                       Text("Skill Share",style:TextStyle(fontSize:15,fontWeight: FontWeight.bold), )
+                     ],
+                   ),
+                   Container(// end action button for notification
+                     decoration: BoxDecoration(
+                       color: Colors.white,
+                       shape: BoxShape.circle
+                     ),
+child: Padding(
+  padding: const EdgeInsets.all(1.0),
+  child: Icon(Icons.notifications_none, ),
+)
+                   )
+                 ],
+               ),
+Text("Welcome to smart Career Discovery", style: TextStyle(fontSize: 30,),),
+
+                  SizedBox( height: 40,
+                    child: SearchBar(
+                       hintText: "Search..",
+                      elevation: WidgetStatePropertyAll(.5),
+                      onChanged: (value){},
+                      onSubmitted: (value){},
+
+                      trailing:[ Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: const Icon(
+                          Icons.search,
+                          color: Color(0xFF284A16),
+                          size: 20,
+
+                        ),
+                      )]
+                    ),
+                  ),
+
+                      Expanded(
+                        child:(CatalogModel.courses.isNotEmpty)?
+                        ListView.builder(
+               itemCount: CatalogModel.courses.length,
+                 itemBuilder: (context,index)=>
+                 ItemWidget(item: CatalogModel.courses[index])
+                        )
+                 : Center(
+                        child: CircularProgressIndicator(),
+                   ),
+                      )
+
+                ],
+               ),
+             ),
+           )
+         )
+     ),
      );
+
 
   }
 
