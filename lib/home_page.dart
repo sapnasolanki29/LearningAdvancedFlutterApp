@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,9 +18,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
- // final List dummyList=List.generate(5,(index)=>CatalogModel.courses[0]);
-  // final int days=30;
-  // final String name="dream code";
+  List<Course> filteredList=[];
   @override
   void initState() {
     super.initState();
@@ -87,8 +86,12 @@ Text("Welcome to smart Career Discovery", style: TextStyle(fontSize: 30,),),
                     child: SearchBar(
                        hintText: "Search..",
                       elevation: WidgetStatePropertyAll(.5),
-                      onChanged: (value){},
-                      onSubmitted: (value){},
+                      onChanged: (value){
+                         setState(() {
+                         filteredList=CatalogModel.courses.where((a)=>a.name.contains(value)).toList();
+                         });
+                         },
+                      onSubmitted: (value){ },
 
                       trailing:[ Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -103,11 +106,11 @@ Text("Welcome to smart Career Discovery", style: TextStyle(fontSize: 30,),),
                   ),
 
                       Expanded(
-                        child:(CatalogModel.courses.isNotEmpty)?
+                        child:(filteredList.isNotEmpty)?
                         ListView.builder(
-               itemCount: CatalogModel.courses.length,
+               itemCount: filteredList.length,
                  itemBuilder: (context,index)=>
-                 ItemWidget(item: CatalogModel.courses[index])
+                 ItemWidget(item: filteredList[index])
                         )
                  : Center(
                         child: CircularProgressIndicator(),
@@ -131,7 +134,7 @@ Text("Welcome to smart Career Discovery", style: TextStyle(fontSize: 30,),),
     final decodeData=jsonDecode(catalogJson);
     var coursesData=decodeData["courses"];
 setState(() {
-  CatalogModel.courses=List.from(coursesData).map<Course>((course)=>Course.fromMap(course)).toList();
+  filteredList=CatalogModel.courses=List.from(coursesData).map<Course>((course)=>Course.fromMap(course)).toList();
   print(CatalogModel.courses);
 });
   }
