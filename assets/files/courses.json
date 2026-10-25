@@ -27,7 +27,7 @@
     {
       "id": 3,
       "title": "UI/UX",
-      "category": "UI/UX Design",
+      "category": "Creative",
       "description": "Figma design & wireframing.",
       "duration": "2M",
       "demand": "Med",
@@ -39,7 +39,7 @@
     {
       "id": 4,
       "title": "Graphic",
-      "category": "Graphic Designing",
+      "category": "Creative",
       "description": "Photoshop & branding assets.",
       "duration": "2M",
       "demand": "Med",
@@ -51,7 +51,7 @@
     {
       "id": 5,
       "title": "VideoEdit",
-      "category": "Video Editing",
+      "category": "Creative",
       "description": "Premiere Pro & reels editing.",
       "duration": "2M",
       "demand": "High",
@@ -63,7 +63,7 @@
     {
       "id": 6,
       "title": "AIVideo",
-      "category": "AI Videos",
+      "category": "AI",
       "description": "Runway, Sora & generative tools.",
       "duration": "1M",
       "demand": "High",
@@ -75,7 +75,7 @@
     {
       "id": 7,
       "title": "AgenticAI",
-      "category": "Agentic AI",
+      "category": "AI",
       "description": "LangChain, AutoGen & Python.",
       "duration": "3M",
       "demand": "High",
@@ -83,6 +83,30 @@
       "fee": "Paid",
       "suitableFor": "python+ai",
       "imageUrl": "https://onug.net/wp-content/uploads/2025/02/ONUG-Blog-Image-1024x512-1.jpg"
+    },
+    {
+      "id": 8,
+      "title": "Xamarin/Maui",
+      "category": "Mobile Development",
+      "description": "Cross-platform mobile app development.",
+      "duration": "3M",
+      "demand": "High",
+      "salary": "10 LPA",
+      "fee": "Free",
+      "suitableFor": "c#, .net",
+      "imageUrl": "https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": 9,
+      "title": "React Native",
+      "category": "Mobile Development",
+      "description": "Cross-platform mobile app development.",
+      "duration": "3M",
+      "demand": "High",
+      "salary": "10 LPA",
+      "fee": "Free",
+      "suitableFor": "java script",
+      "imageUrl": "https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=800&q=80"
     }
   ]
 }

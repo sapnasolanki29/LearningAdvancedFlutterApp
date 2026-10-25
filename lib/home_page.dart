@@ -19,6 +19,15 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<Course> filteredList=[];
+  String selectedCategory='All';
+  String searchQuery="";
+  final List<String> categories=[
+   'All',
+   'Mobile Development',
+   'Web Design',
+   'Creative' ,
+    'AI'
+  ];
   @override
   void initState() {
     super.initState();
@@ -32,7 +41,9 @@ class _HomePageState extends State<HomePage> {
      // appBar: AppBar(
      //   title: Text("Catalog App"),
      // ),
-     body:Builder(
+     body: DefaultTabController(
+         length: categories.length,
+         child: Builder(
          builder: (context) =>
      Container(
            decoration:  BoxDecoration(
@@ -88,7 +99,11 @@ Text("Welcome to smart Career Discovery", style: TextStyle(fontSize: 30,),),
                       elevation: WidgetStatePropertyAll(.5),
                       onChanged: (value){
                          setState(() {
-                         filteredList=CatalogModel.courses.where((a)=>a.name.contains(value)).toList();
+                           selectedCategory=categories[DefaultTabController.of(context).index];
+searchQuery=value;
+                         // filteredList=selectedCategory=='All'?CatalogModel.courses.where((a)=>a.name.contains(value)).toList()
+                         //     :filteredList.where((a)=>a.name.contains(value)).toList();
+                         // print(filteredList);
                          });
                          },
                       onSubmitted: (value){ },
@@ -105,24 +120,67 @@ Text("Welcome to smart Career Discovery", style: TextStyle(fontSize: 30,),),
                     ),
                   ),
 
-                      Expanded(
-                        child:(filteredList.isNotEmpty)?
-                        ListView.builder(
-               itemCount: filteredList.length,
-                 itemBuilder: (context,index)=>
-                 ItemWidget(item: filteredList[index])
-                        )
-                 : Center(
-                        child: CircularProgressIndicator(),
-                   ),
-                      )
+Expanded(
+  child: Column(
+        children: [
+    TabBar(
+      tabAlignment: TabAlignment.start,
+        labelPadding: const EdgeInsets.symmetric(horizontal: 5),
+        isScrollable: true,
+          dividerColor: Colors.transparent,
+          tabs: categories.map((category){
+          return  Tab(
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: 8,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: Colors.grey.shade400),
+              ),
+              child: Text(category),
+            ),
+          );
+          }).toList(),
+      ),
+                 Expanded(child:
+                 TabBarView(
+                     children: categories.map((category) {
+                       final categoryList = category == 'All'
+                           ? CatalogModel.courses
+                           : CatalogModel.courses
+                           .where((p) => p.category == category)
+                           .toList();
+                       final filteredCourses=categoryList.where((p)=>p.name.toLowerCase()
+                           .contains(searchQuery.toLowerCase())).toList();
+                     //  selectedCategory=category;
+                      return (filteredCourses.isNotEmpty) ?
+                         ListView.builder(
+                             itemCount: filteredCourses.length,
+                             itemBuilder: (context, index) =>
+                                 ItemWidget(item: filteredCourses[index])
+                         )
+                             : Center(
+                           child: CircularProgressIndicator(),
+                         );
 
+
+                     }).toList(),  //children ends
+                 )
+                 )
+                  ],
+                 )
+  //),
+),
                 ],
                ),
              ),
            )
          )
      ),
+     ), // DefaultTabController ends
      );
 
 
