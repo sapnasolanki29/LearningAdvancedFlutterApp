@@ -28,16 +28,16 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
    return Scaffold(
      appBar: AppBar(
-       title: Text("Catalog App"),
+       title: Text("Skill Share"),
      ),
      body:Padding(
        padding: const EdgeInsets.all(10.0),
-       child:(CatalogModel.courses.isNotEmpty)?
-       // ListView.builder(
-       //   itemCount: CatalogModel.courses.length,
-       //     itemBuilder: (context,index)=>
-       //     ItemWidget(item: CatalogModel.courses[index])
-       // )
+       child:Column(
+         children: [
+      Text("Welcome to Career Discovery", style: TextStyle(fontSize: 25),),
+           SizedBox(height: 10,),
+           Expanded(
+             child:(CatalogModel.courses.isNotEmpty)?
       GridView.builder(
         itemCount: CatalogModel.courses.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -46,16 +46,23 @@ class _HomePageState extends State<HomePage> {
           crossAxisSpacing: 10),
           itemBuilder: (context, index){
           final item=CatalogModel.courses[index];
-            return Card(
+            return Column(children:[
+             Card(
               clipBehavior: Clip.antiAlias,
               child: GridTile(
-                  child: Image.network(item.image, fit: BoxFit.cover,)
+                  child: Image.network(item.image, fit: BoxFit.cover, height: 80, width: 120,)
               ),
-            );
+            ),
+              SizedBox(height:10),
+              Text(item.name),
+            ]);
           })
            : Center(
          child: CircularProgressIndicator(),
        ),
+     ),
+         ],
+       )
      ),
 
      drawer:MyDrawer(),

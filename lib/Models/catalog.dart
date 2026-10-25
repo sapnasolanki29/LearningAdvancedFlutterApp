@@ -17,7 +17,7 @@ class Course {
   factory Course.fromMap(Map<String, dynamic> map){
     return Course(
         id:map["id"]??"",
-        name: map["name"]??"",
+        name: map["title"]??"",
         desc: map["description"]??"",
         image: map["imageUrl"]??"",
         avgSalary: map["salary"]??"",
