@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutterprojects/Providers/user_provider.dart';
 import 'package:flutterprojects/routes/routes.dart';
+import 'package:provider/provider.dart';
+
+import 'Models/user.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -16,6 +20,9 @@ class _LoginPageState extends State<LoginPage> {
     setState(() {
       buttonChanged=true;
     });
+    context.read<UserProvider>().setUser(
+        User(id: 1,name:name)
+    );
     await Future.delayed(Duration(seconds: 1));
     if (context.mounted) {
       await Navigator.pushNamed(context, MyRoutes.homeRoute);

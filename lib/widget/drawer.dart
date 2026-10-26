@@ -1,12 +1,13 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutterprojects/Providers/user_provider.dart';
+import 'package:provider/provider.dart';
 
 class MyDrawer extends StatelessWidget{
 const MyDrawer({super.key});
-final String imageUrl="";
-final String imagePath="assets/images/login.jpg";
 @override
   Widget build(BuildContext context) {
+  final user=context.watch<UserProvider>().user;
     return Drawer(
         child: ListView(
           children: [
@@ -27,15 +28,16 @@ final String imagePath="assets/images/login.jpg";
                                CircleAvatar(
                                  backgroundColor: Colors.white,
                             radius: 30,
-                                      backgroundImage:imageUrl.isEmpty?(imagePath.isEmpty? AssetImage(imagePath):null):null,
+                                      backgroundImage:
+                                       (user?.image?.isNotEmpty ?? false)?NetworkImage(user!.image!):null,
                                       child: Icon(Icons.person, size: 40, color: Theme.of(context).colorScheme.primary,
                                       ),
                                     ),
                               SizedBox(height: 10,),
 
-                              Text("Sapna", style: TextStyle(color: Colors.white),),
+                              Text(user?.name??"Guest", style: TextStyle(color: Colors.white),),
                                 SizedBox(height: 5,),
-                              Text("sapna@gmail.com", style: TextStyle(color: Colors.white)),
+                              Text(user?.email??"guest@gmail.com", style: TextStyle(color: Colors.white)),
                               ], ),
                           ),
                         ),
