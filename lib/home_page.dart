@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutterprojects/Models/catalog.dart';
+import 'package:flutterprojects/widget/custom_app_bar.dart';
 import 'package:flutterprojects/widget/drawer.dart';
 import 'package:flutterprojects/widget/itemWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -38,9 +39,6 @@ class _HomePageState extends State<HomePage> {
    return
      Scaffold(
      drawer:MyDrawer(),
-     // appBar: AppBar(
-     //   title: Text("Catalog App"),
-     // ),
      body: DefaultTabController(
          length: categories.length,
          child: Builder(
@@ -64,33 +62,16 @@ class _HomePageState extends State<HomePage> {
                  spacing: 10,
                  crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-               Row(// App Bar
-                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                 children: [
-                   Row(// starting title
-                     spacing: 10,
-                     children: [
-               GestureDetector(
-                 onTap: (){
-                   Scaffold.of(context).openDrawer();
-                 },
-                 child: Icon(Icons.menu,),
-               ),
-                       Text("Skill Share",style:TextStyle(fontSize:15,fontWeight: FontWeight.bold), )
-                     ],
-                   ),
-                   Container(// end action button for notification
-                     decoration: BoxDecoration(
-                       color: Colors.white,
-                       shape: BoxShape.circle
-                     ),
-child: Padding(
-  padding: const EdgeInsets.all(1.0),
-  child: Icon(Icons.notifications_none, ),
-)
-                   )
-                 ],
-               ),
+                  CustomAppBar(
+                    title: 'Skill Share',
+                    actionIcon: Icons.notifications_none,
+                    onActionTap: () {
+                      // Open notifications page
+                    },
+                    onMenuTap: () {
+                      Scaffold.of(context).openDrawer();
+                    },
+                  ),
 Text("Welcome to smart Career Discovery", style: TextStyle(fontSize: 30,),),
 
                   SizedBox( height: 40,
@@ -101,9 +82,6 @@ Text("Welcome to smart Career Discovery", style: TextStyle(fontSize: 30,),),
                          setState(() {
                            selectedCategory=categories[DefaultTabController.of(context).index];
 searchQuery=value;
-                         // filteredList=selectedCategory=='All'?CatalogModel.courses.where((a)=>a.name.contains(value)).toList()
-                         //     :filteredList.where((a)=>a.name.contains(value)).toList();
-                         // print(filteredList);
                          });
                          },
                       onSubmitted: (value){ },

@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutterprojects/Providers/user_provider.dart';
+import 'package:flutterprojects/routes/routes.dart';
 import 'package:provider/provider.dart';
 
 class MyDrawer extends StatelessWidget{
@@ -48,6 +49,10 @@ const MyDrawer({super.key});
             ListTile(
               leading: Icon(Icons.home),
               title: Text("Home"),
+              onTap: (){
+                Navigator.pop(context);
+                Navigator.pushNamed(context, MyRoutes.homeRoute);
+              },
             ),
             ListTile(
               leading: Icon(Icons.settings),
@@ -55,6 +60,10 @@ const MyDrawer({super.key});
             ),ListTile(
               leading: Icon(Icons.person),
               title: Text("Profile"),
+              onTap: (){
+                Navigator.pop(context);
+                Navigator.pushNamed(context, MyRoutes.profileRoute);
+              },
             ),ListTile(
               leading: Icon(Icons.notifications),
               title: Text("Notification"),

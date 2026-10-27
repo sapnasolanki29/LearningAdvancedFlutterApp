@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterprojects/Providers/user_provider.dart';
 import 'package:flutterprojects/home_page.dart';
+import 'package:flutterprojects/profile_page.dart';
 import 'package:flutterprojects/routes/routes.dart';
 import 'package:flutterprojects/widget/my_theme.dart';
 import 'package:provider/provider.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget{
         "/":(context)=>LoginPage(),
         MyRoutes.loginRoute:(context)=>LoginPage(),
         MyRoutes.homeRoute:(context)=>HomePage(),
+        MyRoutes.profileRoute:(context)=>ProfilePage(),
       },
     );
   }
