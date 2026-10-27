@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 class MyTheme {
   //Light Theme configuration
   static ThemeData lightTheme(BuildContext context)=>  ThemeData(
-    useMaterial3: true,
+      useMaterial3: true,
     colorScheme:ColorScheme(
       primary: Color(0xFF86CC4F),        // Deep mint green for high contrast & readability
       onPrimary: Color(0xFFFFFFFF),
@@ -26,7 +26,7 @@ class MyTheme {
     fontFamily: GoogleFonts.lato().fontFamily,
     appBarTheme: AppBarThemeData(
         foregroundColor: Colors.white,
-        backgroundColor: Colors.deepPurple
+        backgroundColor: Theme.of(context).colorScheme.primary
     ),
 
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -41,7 +41,49 @@ class MyTheme {
         backgroundColor:Colors.deepPurple,
         foregroundColor: Colors.white
     ),
-    );
+
+
+      inputDecorationTheme: InputDecorationThemeData(
+         filled: true,
+        fillColor: Theme.of(context).colorScheme.primary.withValues(alpha: 0.08),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 16,
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide.none,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(
+            color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
+            width: 1,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(
+            color: Color(0xFF86CC4F),
+            width: 2,
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(
+            color: Theme.of(context).colorScheme.error,
+            width: 1,
+          ),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(
+            color: Theme.of(context).colorScheme.error,
+            width: 2,
+          ),
+        ),
+      ),
+     );
 
   //Dark theme Configuration---------
   static ThemeData darkTheme()=>
