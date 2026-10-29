@@ -4,13 +4,19 @@ import 'package:flutterprojects/widget/drawer.dart';
 import 'package:provider/provider.dart';
 
 import 'Providers/user_provider.dart';
-
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
   @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  bool isEditing = false;
+  @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    final colors = Theme.of(context).colorScheme;
+    return   Scaffold(
         drawer:MyDrawer(),
         body: Builder(
             builder: (context) =>
@@ -26,17 +32,24 @@ class ProfilePage extends StatelessWidget {
           ),
         ),
         child: SafeArea(
+          child:Center(
+          child:SingleChildScrollView(
+            child:ConstrainedBox(constraints: BoxConstraints(maxWidth: 400),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 spacing: 10,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                 CustomAppBar(
                 title: 'My Profile',
-                actionIcon: Icons.notifications_none,
+                actionIcon:  Icons.edit,
+                color:isEditing?Colors.grey:colors.primary,
                 onActionTap: () {
-                  // Open notifications page
+                  setState(() {
+                    isEditing=true;
+                  });
                 },
                 onMenuTap: () {
                   Scaffold.of(context).openDrawer();
@@ -175,10 +188,20 @@ class ProfilePage extends StatelessWidget {
                               ),
                             ),
                            SizedBox(height: 5,),
+                           Row( mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                               children: [
                            Row( spacing: 3, children: [
                              Icon(Icons.logout, color: Colors.red, size: 20,),
                              Text("Logout", style: TextStyle(color: Colors.red),),
-                           ] )
+                           ] ),
+                                 ElevatedButton(
+                                     onPressed: (){
+                                       setState(() {
+                                         isEditing=false;
+                                       });
+                                     },
+                                     child: Text("Save"))
+                           ])
                           ],
                         )
                         // ElevatedButton(onPressed: (){
@@ -192,6 +215,9 @@ class ProfilePage extends StatelessWidget {
                 ],
               ),
             )
+        )
+          )
+          )
         )
     ),
         )

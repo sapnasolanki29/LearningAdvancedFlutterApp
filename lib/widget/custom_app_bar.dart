@@ -8,6 +8,7 @@ class CustomAppBar extends StatelessWidget {
   // Custom action
   final IconData actionIcon;
   final VoidCallback? onActionTap;
+  final Color? color;
 
   const CustomAppBar({
     super.key,
@@ -15,7 +16,7 @@ class CustomAppBar extends StatelessWidget {
     this.onMenuTap,
     this.showMenu = true,
     this.actionIcon = Icons.notifications_none,
-    this.onActionTap,
+    this.onActionTap, this.color,
   });
 
   @override
@@ -59,7 +60,7 @@ class CustomAppBar extends StatelessWidget {
               onPressed: onActionTap,
               icon: Icon(
                 actionIcon,
-                color: colors.primary,
+                color: color,
               ),
             ),
           ),

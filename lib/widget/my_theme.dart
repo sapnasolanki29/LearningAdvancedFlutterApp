@@ -1,51 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 class MyTheme {
+
   //Light Theme configuration
-  static ThemeData lightTheme(BuildContext context)=>  ThemeData(
-      useMaterial3: true,
-    colorScheme:ColorScheme(
-      primary: Color(0xFF86CC4F),        // Deep mint green for high contrast & readability
+  static ThemeData lightTheme(BuildContext context) {
+    final ColorScheme colorScheme = ColorScheme(
+      primary: Color(0xFF86CC4F),
+      // Deep mint green for high contrast & readability
       onPrimary: Color(0xFFFFFFFF),
-      primaryContainer: Color(0xFFBCE39D), // Your exact color as a perfect container/card background
+      primaryContainer: Color(0xFFBCE39D),
+      // Your exact color as a perfect container/card background
       onPrimaryContainer: Color(0xFF284A19),
 
-      secondary: Color(0xFF506355),      // Soft matching secondary green-slate
+      secondary: Color(0xFF506355),
+      // Soft matching secondary green-slate
       onSecondary: Color(0xFFFFFFFF),
       secondaryContainer: Color(0xFFD6EEC2),
       onSecondaryContainer: Color(0xFF0D1F14),
 
-      surface: Color(0xFFF4FBF6),        // Ultra-clean clean background with a touch of mint
+      surface: Color(0xFFF4FBF6),
+      // Ultra-clean clean background with a touch of mint
       onSurface: Color(0xFF171D19),
       error: Color(0xFFBA1A1A),
       onError: Color(0xFFFFFFFF),
       //seedColor:Colors.greenAccent,
-      brightness:Brightness.light,
-    ),
+      brightness: Brightness.light,
+    );
+    return ThemeData(useMaterial3: true,
+      colorScheme: colorScheme,
 
-    fontFamily: GoogleFonts.lato().fontFamily,
-    appBarTheme: AppBarThemeData(
-        foregroundColor: Colors.white,
-        backgroundColor: Theme.of(context).colorScheme.primary
-    ),
-
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style:ElevatedButton.styleFrom(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        foregroundColor: Colors.white,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      fontFamily: GoogleFonts
+          .lato()
+          .fontFamily,
+      appBarTheme: AppBarThemeData(
+          foregroundColor: Colors.white,
+          backgroundColor: colorScheme.primary
       ),
-    ),
 
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor:Colors.deepPurple,
-        foregroundColor: Colors.white
-    ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: colorScheme
+              .primary,
+          foregroundColor: Colors.white,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        ),
+      ),
+
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: Colors.deepPurple,
+          foregroundColor: Colors.white
+      ),
 
 
       inputDecorationTheme: InputDecorationThemeData(
-         filled: true,
-        fillColor: Theme.of(context).colorScheme.primary.withValues(alpha: 0.08),
+        filled: true,
+        fillColor: colorScheme
+            .primary
+            .withValues(alpha: 0.08),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 16,
@@ -57,7 +68,9 @@ class MyTheme {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
+            color:colorScheme
+                .primary
+                .withValues(alpha: 0.2),
             width: 1,
           ),
         ),
@@ -71,19 +84,21 @@ class MyTheme {
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.error,
+            color:colorScheme
+                .error,
             width: 1,
           ),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.error,
+            color: colorScheme.error,
             width: 2,
           ),
         ),
       ),
-     );
+    );
+  }
 
   //Dark theme Configuration---------
   static ThemeData darkTheme()=>
