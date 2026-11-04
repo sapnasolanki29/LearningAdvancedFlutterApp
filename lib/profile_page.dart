@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterprojects/Models/user.dart';
 import 'package:flutterprojects/widget/custom_app_bar.dart';
 import 'package:flutterprojects/widget/drawer.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +14,10 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   bool isEditing = false;
+   String address="";
+   String profession="";
+   String mobile="";
+
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
@@ -145,10 +150,32 @@ class _ProfilePageState extends State<ProfilePage> {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(5),
                       ),
-                    child: Row(
-                      children: [
-                        Text("Address: ${context.watch<UserProvider>().user?.address}")
-                      ],
+                    child: SizedBox(
+                      height: 25,
+                      child: Row(
+                        children: [
+                          Text("Address: "),
+                          isEditing?Expanded(
+                            child: TextFormField(
+
+                              initialValue: context.watch<UserProvider>().user?.address??'',
+                              decoration: InputDecoration(
+                                hintText: "Address",
+                                 border: null,
+                                enabledBorder: null,
+                                focusedBorder: InputBorder.none,
+                                errorBorder: null,
+                                focusedErrorBorder: null,
+                                contentPadding: EdgeInsets.all(11),
+                              ),
+                              onChanged: (value){
+                               address=value;
+                              },
+                                                   ),
+                          ): Text("${context.watch<UserProvider>().user?.address}"
+                          )
+                        ],
+                      ),
                     ),
                     ),
                             Container(
@@ -157,11 +184,32 @@ class _ProfilePageState extends State<ProfilePage> {
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(5),
                               ),
+                              child:SizedBox(
+                              height: 25,
                               child: Row(
                                 children: [
-                                  Text("Profession: ${context.watch<UserProvider>().user?.profession}")
-                                ],
+                                  Text("Profession: "),
+                                  isEditing?Expanded(
+                                    child: TextFormField(
+
+                                      initialValue: context.watch<UserProvider>().user?.profession??'',
+                                      decoration: InputDecoration(
+                                        hintText: "Profession",
+                                        border: null,
+                                        enabledBorder: null,
+                                        focusedBorder: InputBorder.none,
+                                        errorBorder: null,
+                                        focusedErrorBorder: null,
+                                        contentPadding: EdgeInsets.all(11),
+                                      ),
+                                      onChanged: (value){
+                                        profession=value;
+                                      },
+                                    ),
+                                  ): Text("${context.watch<UserProvider>().user?.profession}"
+                                  ) ],
                               ),
+                            )
                             ),
                             Container(
                               padding: EdgeInsets.all(5),
@@ -169,24 +217,34 @@ class _ProfilePageState extends State<ProfilePage> {
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(5),
                               ),
-                              child: Row(
-                                children: [
-                                  Text("Mobile: ${context.watch<UserProvider>().user?.mobile}")
-                                ],
+                              child: SizedBox(
+                                height: 25,
+                                child: Row(
+                                  children: [
+                                    Text("Mobile: "),
+                                    isEditing?Expanded(
+                                      child: TextFormField(
+                                        initialValue: context.watch<UserProvider>().user?.mobile??'',
+                                        decoration: InputDecoration(
+                                          hintText: "Mobile",
+                                          border: null,
+                                          enabledBorder: null,
+                                          focusedBorder: InputBorder.none,
+                                          errorBorder: null,
+                                          focusedErrorBorder: null,
+                                          contentPadding: EdgeInsets.all(11),
+                                        ),
+                                        onChanged: (value){
+                                          mobile=value;
+                                        },
+                                      ),
+                                    ): Text("${context.watch<UserProvider>().user?.mobile}"
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
-                            Container(
-                              padding: EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Row(
-                                children: [
-                                  Text("Address: ${context.watch<UserProvider>().user?.address}")
-                                ],
-                              ),
-                            ),
+
                            SizedBox(height: 5,),
                            Row( mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                children: [
@@ -195,11 +253,20 @@ class _ProfilePageState extends State<ProfilePage> {
                              Text("Logout", style: TextStyle(color: Colors.red),),
                            ] ),
                                  ElevatedButton(
-                                     onPressed: (){
+
+                                     onPressed:isEditing? (){
                                        setState(() {
                                          isEditing=false;
                                        });
-                                     },
+                                       context.read<UserProvider>().setUser(
+                                         User(id: 1, name: context.read<UserProvider>().user!.name,
+                                             email: context.read<UserProvider>().user!.email,
+                                             address: address,
+                                           profession: profession,
+                                           mobile: mobile
+                                         )
+                                       );
+                                     }:null,
                                      child: Text("Save"))
                            ])
                           ],
