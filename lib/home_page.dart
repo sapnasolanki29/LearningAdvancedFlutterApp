@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutterprojects/Models/catalog.dart';
+import 'package:flutterprojects/services/course_api_service.dart';
 import 'package:flutterprojects/widget/custom_app_bar.dart';
 import 'package:flutterprojects/widget/drawer.dart';
 import 'package:flutterprojects/widget/itemWidget.dart';
@@ -133,7 +134,7 @@ Expanded(
                            .toList();
                        final filteredCourses=categoryList.where((p)=>p.name.toLowerCase()
                            .contains(searchQuery.toLowerCase())).toList();
-                     //  selectedCategory=category;
+
                       return (filteredCourses.isNotEmpty) ?
                          ListView.builder(
                              itemCount: filteredCourses.length,
@@ -166,12 +167,18 @@ Expanded(
 
   void loadData() async{
     await Future.delayed(Duration(seconds: 2));
-    final catalogJson=await rootBundle.loadString("assets/files/courses.json");
-    final decodeData=jsonDecode(catalogJson);
-    var coursesData=decodeData["courses"];
-setState(() {
-  filteredList=CatalogModel.courses=List.from(coursesData).map<Course>((course)=>Course.fromMap(course)).toList();
-  print(CatalogModel.courses);
-});
+
+    try{
+      final courseData=await CourseApiService().fetchCourses();
+      if(!mounted) return;
+
+      setState(()  {
+        filteredList=CatalogModel.courses= courseData;
+      });
+      print(CatalogModel.courses);
+    }catch(e){
+      print(e.toString());
+    }
+
   }
 }
