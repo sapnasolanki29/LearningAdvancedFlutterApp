@@ -20,7 +20,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Course> filteredList=[];
   String selectedCategory='All';
   String searchQuery="";
   final List<String> categories=[
@@ -33,7 +32,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    loadData();
+    CatalogModel.courses=CourseApiService().fetchCourses();
   }
   @override
   Widget build(BuildContext context) {
@@ -127,31 +126,47 @@ Expanded(
                  Expanded(child:
                  TabBarView(
                      children: categories.map((category) {
-                       final categoryList = category == 'All'
-                           ? CatalogModel.courses
-                           : CatalogModel.courses
-                           .where((p) => p.category == category)
-                           .toList();
-                       final filteredCourses=categoryList.where((p)=>p.name.toLowerCase()
-                           .contains(searchQuery.toLowerCase())).toList();
 
-                      return (filteredCourses.isNotEmpty) ?
-                         ListView.builder(
-                             itemCount: filteredCourses.length,
-                             itemBuilder: (context, index) =>
-                                 ItemWidget(item: filteredCourses[index])
-                         )
-                             : Center(
-                           child: CircularProgressIndicator(),
-                         );
+return FutureBuilder<List<Course>>(
+    future: CatalogModel.courses,
+    builder: (context, snapshot){
+      if(snapshot.connectionState==ConnectionState.waiting){
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      }
+      if(snapshot.hasError){
+        return Center(
+          child: Text('Error: ${snapshot.error}'),
+        );
+      }
+      final courses=snapshot.data??[];
 
+      final categoryList = category == 'All'
+          ? courses
+          : courses
+          .where((p) => p.category == category)
+          .toList();
+      final filteredCourses=categoryList.where((p)=>p.name.toLowerCase()
+          .contains(searchQuery.toLowerCase())).toList();
+if(filteredCourses.isEmpty){
+  return const Center(
+    child: Text('No Courses found'),
+  );
+}
+return   ListView.builder(
+    itemCount: filteredCourses.length,
+    itemBuilder: (context, index) =>
+        ItemWidget(item: filteredCourses[index])
+);
+    }
+);
 
                      }).toList(),  //children ends
-                 )
+                 ) //tabBar view
                  )
                   ],
                  )
-  //),
 ),
                 ],
                ),
@@ -161,24 +176,5 @@ Expanded(
      ),
      ), // DefaultTabController ends
      );
-
-
-  }
-
-  void loadData() async{
-    await Future.delayed(Duration(seconds: 2));
-
-    try{
-      final courseData=await CourseApiService().fetchCourses();
-      if(!mounted) return;
-
-      setState(()  {
-        filteredList=CatalogModel.courses= courseData;
-      });
-      print(CatalogModel.courses);
-    }catch(e){
-      print(e.toString());
-    }
-
   }
 }
