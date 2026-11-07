@@ -37,15 +37,17 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
         child: SafeArea(
-          child:Center(
+          child:Align(
+            alignment:Alignment.topCenter,
           child:SingleChildScrollView(
             child:ConstrainedBox(constraints: BoxConstraints(maxWidth: 400),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                // mainAxisAlignment: MainAxisAlignment.start,
+                //
+                // crossAxisAlignment: CrossAxisAlignment.center,
                 spacing: 10,
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                 CustomAppBar(
                 title: 'My Profile',
@@ -284,7 +286,7 @@ class _ProfilePageState extends State<ProfilePage> {
             )
         )
           )
-          )
+            )
         )
     ),
         )
