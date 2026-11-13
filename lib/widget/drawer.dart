@@ -69,7 +69,10 @@ const MyDrawer({super.key});
               title: Text("Notification"),
             ),ListTile(
               leading: Icon(Icons.category),
-              title: Text("Catalog"),
+              title: Text("Favorite"),
+              onTap: (){
+                Navigator.pushNamed(context, MyRoutes.favoriteRoute);
+              },
             ),
           ],
         ),

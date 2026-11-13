@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutterprojects/Favorites/bloc/favorite_event.dart';
+import 'package:flutterprojects/Favorites/bloc/favorite_state.dart';
 
+import '../Favorites/bloc/favorite_bloc.dart';
 import '../Models/catalog.dart';
 
 class ItemWidget extends StatelessWidget {
@@ -10,12 +14,6 @@ class ItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      // child: ListTile(
-      //   leading:Image.network(item.image, fit: BoxFit.cover, width: 60,),
-      //   title:Text( item.name, style: TextStyle(fontWeight: FontWeight.bold),),
-      //   subtitle: Text(item.desc, style: TextStyle(color: Colors.black54),),
-      //
-      // ),
      child: Padding(
        padding: const EdgeInsets.all(10),
        child: Column(
@@ -25,14 +23,27 @@ class ItemWidget extends StatelessWidget {
              mainAxisAlignment: MainAxisAlignment.spaceBetween,
              children: [
                Text( item.name, style: TextStyle(fontWeight: FontWeight.bold),),
-       Container(// end action button for notification
-         decoration: BoxDecoration(
-             shape: BoxShape.circle
-         ),
-         child: Padding(
-           padding: const EdgeInsets.all(1.0),
-           child: Icon(Icons.more_vert_outlined, size: 20, ),
-         )
+       BlocBuilder<FavoriteBloc,FavoriteState>(
+         builder: (context, state) {
+           final isSaved=state.isFavorite(item);
+           return InkWell(
+             onTap: (){
+context.read<FavoriteBloc>().add(
+  ToggleFavorite(item),
+);
+             },
+             child: Container(
+               decoration: BoxDecoration(
+                   shape: BoxShape.circle
+               ),
+               child: Padding(
+                 padding: const EdgeInsets.all(1.0),
+                 child:isSaved? Icon(Icons.bookmark, size: 20, )
+                     :Icon(Icons.bookmark_outline, size: 20, )
+               )
+             ),
+           );
+         }
        )
              ],
            ),
